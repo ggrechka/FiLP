@@ -64,3 +64,6 @@ parent(fedor,kolya).
 
 child(X,Y):-parent(Y,X).
 children(X):-child(Y,X), write(Y), write(" "), fail.
+
+mother(X,Y):-woman(X), parent(X,Y).
+mother(X):-mother(X,Y), write(Y), write(" "), fail.
