@@ -106,3 +106,32 @@ deadline(irinaKnyazeva,1).
 deadline(sergejIvanov,2).
 deadline(renalSHambazov,1).
 deadline(timurSamiev,2).
+
+question1(X1):-	write("What group is the student from?"),nl,
+			write("1. First group"),nl,
+			write("2. Second group"),nl,
+    		write("3. Third group"),nl,
+			write("4. Fourth group"),nl,
+    		write("5. Fifth group"),nl,
+			read(X1).
+
+question2(X2):-	write("Male or Female?"),nl,
+			write("1. Male"),nl,
+			write("2. Female"),nl,
+			read(X2).
+
+question3(X3):-	write("Is there a discount available?"),nl,
+			write("1. 10%"),nl,
+			write("2. 20%"),nl,
+    		write("3. 30%"),nl,
+			write("4. 40%"),nl,
+			read(X3).
+
+question4(X4):-	write("Does the student meet deadlines?"),nl,
+			write("1. Yes"),nl,
+			write("2. No"),nl,
+			read(X4).
+
+pr:-		question1(X1),question2(X2),question3(X3),question4(X4),
+		group(X,X1),gender(X,X2),sales(X,X3),deadline(X,X4),
+		write(X).
