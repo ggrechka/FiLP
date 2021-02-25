@@ -83,3 +83,6 @@ b_s(X):- b_s(X,Y), not(Y=X), write(Y), write(" "), fail.
 
 grand_pa(X,Y):- man(X), parent(Z,Y), parent(X,Z).
 grand_pas(X):- grand_pa(Y,X), write(Y), write(" "), fail.
+
+grand_so(X,Y):- man(X), parent(Z,X), parent(Y,Z).
+grand_son(X):- grand_so(Y,X), write(Y), write(" "), fail.
