@@ -99,3 +99,24 @@ not(in_list(Style,[nata,white,white])),
 not(in_list(Style,[nata,blue,blue])),
 
 write(Style).
+
+
+%4 задание
+pr_ein4:- Employees = [_,_,_],
+
+in_list(Employees,[_,sles,younger,no]),
+in_list(Employees,[borisov,_,_,yes]),
+
+in_list(Employees,[semenov,_,_,_]),
+in_list(Employees,[ivanov,_,_,_]),
+in_list(Employees,[_,tok,_,_]),
+in_list(Employees,[_,svar,_,_]),
+in_list(Employees,[_,_,older,_]),
+in_list(Employees,[_,_,middle-aged,_]),
+in_list(Employees,[_,_,_,not-stated]),
+
+not(in_list(Employees,[_,tok,older,_])),
+not(in_list(Employees,[semenov,tok,_,_])),
+not(in_list(Employees,[semenov,_,younger,_])),
+
+write(Employees).
