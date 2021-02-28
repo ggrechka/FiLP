@@ -53,3 +53,9 @@ min1(0,N,N):- !.
 min1(N,B,X):- D is N mod 10, 1 is D mod 2, D<B, !, E is N div 10, min1(E,D,X). 
 min1(N,B,X):- D is N div 10, min1(D,B,X).
 minimal(N,X):-min1(N,10,X).
+
+nod(A,A,A):-!.
+nod(0,B,B):-!.
+nod(A,0,A):-!.
+nod(A,B,X):-A>B, C is A mod B, nod(C,B,X).
+nod(A,B,X):-A<B, C is B mod A, nod(A,C,X).
