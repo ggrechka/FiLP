@@ -144,3 +144,27 @@ not(in_list(Drinks,[glass,milk])),
 not(in_list(Drinks,[can,milk])),
 
 write(Drinks).
+
+%6 задание
+pr_ein6:- Professions = [_,_,_,_],
+in_list(Professions,[pavlov,_]),
+in_list(Professions,[levickiy,_]),
+in_list(Professions,[voronov,_]),
+in_list(Professions,[saharov,_]),
+
+
+in_list(Professions,[_,writer]),
+in_list(Professions,[_,dancer]),
+in_list(Professions,[_,artist]),
+in_list(Professions,[_,singer]),
+
+not(in_list(Professions,[voronov,singer])),
+not(in_list(Professions,[levickiy,singer])),
+not(in_list(Professions,[voronov,artist])),
+not(in_list(Professions,[pavlov,writer])),
+not(in_list(Professions,[pavlov,artist])),
+not(in_list(Professions,[saharov,writer])),
+not(in_list(Professions,[voronov,writer])),
+
+
+write(Professions).
