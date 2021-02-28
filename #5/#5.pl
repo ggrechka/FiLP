@@ -120,3 +120,27 @@ not(in_list(Employees,[semenov,tok,_,_])),
 not(in_list(Employees,[semenov,_,younger,_])),
 
 write(Employees).
+
+%5 задание
+pr_ein5:- Drinks = [_,_,_,_],
+
+in_list(Drinks,[bottle,_]),
+in_list(Drinks,[glass,_]),
+in_list(Drinks,[jug,_]),
+in_list(Drinks,[can,_]),
+
+in_list(Drinks,[_,milk]),
+in_list(Drinks,[_,lemonade]),
+in_list(Drinks,[_,kvas]),
+in_list(Drinks,[_,water]),
+
+not(in_list(Drinks,[bottle,milk])),
+not(in_list(Drinks,[bottle,water])),
+not(in_list(Drinks,[jug,lemonade])),
+not(in_list(Drinks,[jug,kvas])),
+not(in_list(Drinks,[can,lemonade])),
+not(in_list(Drinks,[can,water])),
+not(in_list(Drinks,[glass,milk])),
+not(in_list(Drinks,[can,milk])),
+
+write(Drinks).
