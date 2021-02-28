@@ -168,3 +168,26 @@ not(in_list(Professions,[voronov,writer])),
 
 
 write(Professions).
+
+%7 задача
+pr_ein7:- Athletes = [_,_,_],
+    
+	in_list(Athletes,[michael,_,basketball]),
+	in_list(Athletes,[simon,israel,_]),
+	in_list(Athletes,[richard,_,_]),
+	
+	in_list(Athletes,[_,amerika,_]),
+	in_list(Athletes,[_,australia,_]),
+	
+	in_list(Athletes,[_,_,tennis]),
+	in_list(Athletes,[_,_,cricket]),
+	
+	
+	not(in_list(Athletes,[michael,amerika,_])),
+	not(in_list(Athletes,[simon,_,tennis])),
+	
+	in_list(Athletes,[Who1,australia,_]),
+	in_list(Athletes,[richard,_,Who2]),
+	write(Athletes), nl,
+	write(Who1), write(" - australia"), nl,
+	write(Who2), write(" - Richard sport"), nl.
