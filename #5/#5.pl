@@ -68,3 +68,34 @@ not(in_list(Hair,[belokurov,brunet])),
 not(in_list(Hair,[rizhov,red])),
 not(in_list(Hair,[chernov,brunet])),
 write(Hair).
+
+%3 задание
+
+pr_ein3:- Style=[_,_,_],
+
+in_list(Style,[anya,_,_]),
+in_list(Style,[nata,_,_]),
+in_list(Style,[valya,_,_]),
+in_list(Style,[_,white,_]),
+in_list(Style,[_,green,_]),
+in_list(Style,[_,blue,_]),
+in_list(Style,[_,_,white]),
+in_list(Style,[_,_,green]),
+in_list(Style,[_,_,blue]),
+
+in_list(Style,[nata,_,green]),
+
+(in_list(Style,[anya,green,green]);
+in_list(Style,[anya,white,white]);
+in_list(Style,[anya,blue,blue])),
+not(in_list(Style,[valya,white,_])),
+not(in_list(Style,[valya,_,white])),
+not(in_list(Style,[valya,white,white])),
+not(in_list(Style,[valya,green,green])),
+not(in_list(Style,[valya,white,white])),
+not(in_list(Style,[valya,blue,blue])),
+not(in_list(Style,[nata,green,green])),
+not(in_list(Style,[nata,white,white])),
+not(in_list(Style,[nata,blue,blue])),
+
+write(Style).
