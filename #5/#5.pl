@@ -1,3 +1,4 @@
+%1 задание
 sub_posl([],_):-!.
 sub_posl(_,[]):-fail,!.
 sub_posl([H|Sub_list],[H|List]):-sub_posl(Sub_list,List),!.
@@ -48,3 +49,18 @@ in_list(Houses,[_,WHO1,water,_,_]),
 in_list(Houses,[_,WHO2,_,zebra,_]),
 write(Houses), nl,
 write(WHO1),nl,write(WHO2),nl.
+
+%2 задание
+pr_ein2:-Hair=[_,_,_],
+
+in_list(Hair,[belokurov,_]),
+in_list(Hair,[chernov,_]),
+in_list(Hair,[rizhov,_]),
+in_list(Hair,[_,brunet]),
+in_list(Hair,[_,red]),
+in_list(Hair,[_,blond]),
+not(in_list(Hair,[belokurov,blond])),
+not(in_list(Hair,[belokurov,brunet])),
+not(in_list(Hair,[rizhov,red])),
+not(in_list(Hair,[chernov,brunet])),
+write(Hair).
