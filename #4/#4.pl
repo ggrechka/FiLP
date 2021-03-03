@@ -50,3 +50,7 @@ program_8:-write("Vvedite N: "), read(N),nl,
 write("list: "), read_list(N,List), min_list_down(List,Min),
 write("Min element iz list: "), write(Min),!.
 program_8:-write("List 0 :(").
+
+%9 задание
+member([X|_],X):-!.
+member([_|T],X):-member(T,X).
