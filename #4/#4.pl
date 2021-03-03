@@ -17,7 +17,14 @@ sum_ls_down([Head|Tail], CurSum, Sum) :- CurSum1 is CurSum + Head, sum_ls_down(T
 sum_ls_up([],0) :- !.
 sum_ls_up([Head|Tail], Sum) :- sum_ls_up(Tail,Sum1),Sum is (Sum1 + Head).
 
-%4 задание
+%4 задание-1
 list_el_numb([H|_],H,N,N):-!.
 list_el_numb([_|T],L,X,N):-X1 is X+1,list_el_numb(T,L,X1,N).
 list_el_numb(List,L,N):-list_el_numb(List,L,0,N).
+
+%4 задание-2
+program:-write("Vvedite N: "), read(N),nl,
+write("List: "), read_list(N,List),nl,
+write("Element: "), read(L),nl,
+list_el_numb(List,L,Numb), write(Numb),!;
+write("Net Elementov").
