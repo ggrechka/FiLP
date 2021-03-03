@@ -44,3 +44,9 @@ min_list_up([H|T], Min):-min_list_up(T,Min1),(H < Min1 -> Min is H;Min is Min1).
 min_list_down([],Min,Min):-!.
 min_list_down([H|T],X,Min):-(H < X -> X1 is H; X1 is X),min_list_down(T,X1,Min).
 min_list_down([H|T],Min):- min_list_down(T,H,Min).
+
+%8 задание
+program_8:-write("Vvedite N: "), read(N),nl,
+write("list: "), read_list(N,List), min_list_down(List,Min),
+write("Min element iz list: "), write(Min),!.
+program_8:-write("List 0 :(").
