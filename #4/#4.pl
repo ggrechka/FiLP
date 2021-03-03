@@ -12,3 +12,7 @@ write_list([H|T]) :- write(H), write(" "), write_list(T).
 %2 задание
 sum_ls_down([], Sum, Sum) :- !.
 sum_ls_down([Head|Tail], CurSum, Sum) :- CurSum1 is CurSum + Head, sum_ls_down(Tail, CurSum1, Sum).
+
+%3 задание
+sum_ls_up([],0) :- !.
+sum_ls_up([Head|Tail], Sum) :- sum_ls_up(Tail,Sum1),Sum is (Sum1 + Head).
