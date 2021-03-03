@@ -28,3 +28,10 @@ write("List: "), read_list(N,List),nl,
 write("Element: "), read(L),nl,
 list_el_numb(List,L,Numb), write(Numb),!;
 write("Net Elementov").
+
+%5 задание
+programmm:- write("Vvedite N: "), read(N),nl,
+write("List: "), read_list(N,List),nl,
+write("Vvedite kol-vo elementov: "), read(Numb),nl,
+list_el_numb(List,L,Numb), write(L),!.
+programmm:- write("Net Elementov c numberom").
