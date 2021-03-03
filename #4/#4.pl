@@ -35,3 +35,7 @@ write("List: "), read_list(N,List),nl,
 write("Vvedite kol-vo elementov: "), read(Numb),nl,
 list_el_numb(List,L,Numb), write(L),!.
 programmm:- write("Net Elementov c numberom").
+
+%6 задание
+min_list_up([H], H):-!.
+min_list_up([H|T], Min):-min_list_up(T,Min1),(H < Min1 -> Min is H;Min is Min1).
