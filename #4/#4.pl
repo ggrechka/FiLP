@@ -66,3 +66,7 @@ sub_list([H|TS],[H|TL]):-sub_list(TS,TL).
 
 p(S,L):-sub_list(S,L),!.
 p(S,[_|T]):-p(S,T).
+
+%12 задание
+del_number(0,[_|T],T):- !.
+del_number(X,[Head|T1],[Head|T2]) :- X1 is X-1,del_number(X1,T1,T2).
