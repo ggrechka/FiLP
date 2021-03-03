@@ -54,3 +54,8 @@ program_8:-write("List 0 :(").
 %9 задание
 member([X|_],X):-!.
 member([_|T],X):-member(T,X).
+
+%10 задание
+reverse(L,NewList):-reverse(L,[],NewList).
+reverse([],InvL,InvL):-!.
+reverse([H|T],CurList,InvL):-reverse(T,[H|CurList],InvL).
