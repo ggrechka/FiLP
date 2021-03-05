@@ -79,3 +79,8 @@ remove_equal([H|T],X,[H|T1]):-remove_equal(T,X,T1).
 %14 задание
 just_once([]):- !.
 just_once([H|T]):- not(member(H,T)), just_once(T).
+
+%15 задание
+simplification([],[]):-!.
+simplification([H|T],T1):-member(H,T),simplification(T,T1),!.
+simplification([H|T],[H|T1]):-not(member(H,T)),simplification(T,T1),!.
