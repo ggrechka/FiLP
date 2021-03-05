@@ -97,3 +97,16 @@ length_list([_|T],X):-length_list(T,X1),X is (X1 + 1).
 %1.5 задание
 task1_5(List,N):- min_list_up(List,Min), list_el_numb(List, Min, Numb), Numb is N,!.
 
+%1.6 задание
+task1_6(List,0,List):-!.
+task1_6(List,Count,X):-Count1 is Count-1, task1_6(List,Count1,L1), sdv(L1,X).
+task1_6(List,X):-task1_6(List,3,X).
+
+sdv([],L,L):-!.
+sdv([H|T],L,[H|L1]):- sdv(T,L, L1).
+sdv([H|T],L):-sdv(T,[H],L).
+
+%1.26 задание
+num_min([],10000,_,_):-!.
+num_min([Head|Tail], Min,I,Num):-I1 is I+1,num_min(Tail,Min1,I1,Num1),(Head<Min1-> Min is Head,Num is I1-2;Min is Min1,Num is Num1).
+num_min([Head|Tail],Num):- num_min([Head|Tail],_,0,Num).
