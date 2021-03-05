@@ -110,3 +110,7 @@ sdv([H|T],L):-sdv(T,[H],L).
 num_min([],10000,_,_):-!.
 num_min([Head|Tail], Min,I,Num):-I1 is I+1,num_min(Tail,Min1,I1,Num1),(Head<Min1-> Min is Head,Num is I1-2;Min is Min1,Num is Num1).
 num_min([Head|Tail],Num):- num_min([Head|Tail],_,0,Num).
+
+%1.29 задание
+inter(List,Number1,Number2):-list_el_numb(List,Number1,0),list_el_numb(List,Number2,1).
+max_in_interval(List,Interval):-inter(Interval,Num1,Num2),max_list_up(List,Max,_), Max<Num2,Max>Num1.
