@@ -74,4 +74,8 @@ del_number(X,[Head|T1],[Head|T2]) :- X1 is X-1,del_number(X1,T1,T2).
 %13 задание
 remove_equal([],_,[]):-!.
 remove_equal([H|T],H,T1):-!,remove_equal(T,H,T1).
-remove_equal([H|T],X,[H|T1]):-remove_equal(T,X,T1)m 
+remove_equal([H|T],X,[H|T1]):-remove_equal(T,X,T1).
+
+%14 задание
+just_once([]):- !.
+just_once([H|T]):- not(member(H,T)), just_once(T).
