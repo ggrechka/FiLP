@@ -89,3 +89,8 @@ simplification([H|T],[H|T1]):-not(member(H,T)),simplification(T,T1),!.
 kolNum([],_,N,N):-!.
 kolNum([H|T],X,N,Y):- (H =:= X -> N1 is (N + 1),kolNum(T,X,N1,Y);N1 is N,kolNum(T,X,N1,Y)).
 kolNum(L,X,Y):-kolNum(L,X,0,Y).
+
+%17 задание
+length_list([],0):-!.
+length_list([_|T],X):-length_list(T,X1),X is (X1 + 1).
+
