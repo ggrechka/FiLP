@@ -52,8 +52,8 @@ write("Min element iz list: "), write(Min),!.
 program_8:-write("List 0 :(").
 
 %9 задание
-member([X|_],X):-!.
-member([_|T],X):-member(T,X).
+member(X,[X|T]):-!.
+member(X,[_|T]):-member(X,T).
 
 %10 задание
 reverse(L,NewList):-reverse(L,[],NewList).
