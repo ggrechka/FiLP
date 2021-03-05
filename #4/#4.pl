@@ -94,3 +94,6 @@ kolNum(L,X,Y):-kolNum(L,X,0,Y).
 length_list([],0):-!.
 length_list([_|T],X):-length_list(T,X1),X is (X1 + 1).
 
+%1.5 задание
+task1_5(List,N):- min_list_up(List,Min), list_el_numb(List, Min, Numb), Numb is N,!.
+
