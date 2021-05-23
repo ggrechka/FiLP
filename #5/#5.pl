@@ -191,3 +191,35 @@ pr_ein7:- Athletes = [_,_,_],
 	write(Athletes), nl,
 	write(Who1), write(" - australia"), nl,
 	write(Who2), write(" - Richard sport"), nl.
+
+
+
+%8 задача
+
+naprotiv(A,B,[_,A,_,B]).
+naprotiv(B,A,[A,_,B,_]).
+naprotiv(B,A,[_,A,_,B]).
+
+task_8:- Players = [_,_,_,_],
+    in_list(Players,[kuznecov,_]),
+    in_list(Players,[tokarev,_]),
+    in_list(Players,[slesarev,_]),
+    in_list(Players,[rezchikov,_]),
+    in_list(Players,[_,kuznec]),
+    in_list(Players,[_,tokar]),
+    in_list(Players,[_,slesar]),
+    in_list(Players,[_,rezchik]),
+
+    not(in_list(Players,[rezchikov,rezchik])),
+    not(in_list(Players,[kuznecov,kuznec])),
+    not(in_list(Players,[tokarev,tokar])),
+    not(in_list(Players,[slesarev,slesar])),
+
+    naprotiv([kuznecov,_],[_,slesar],Players),
+    naprotiv([rezchikov,_],[_,rezchik],Players),
+
+    sprava_next([slesarev,_],[_,tokar],Players),
+
+    sleva_next([_,kuznec],[Who,_],Players),
+    write("On the left from kuznec - "),write(Who),nl,
+    write(Players).
