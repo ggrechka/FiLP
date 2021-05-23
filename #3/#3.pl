@@ -114,3 +114,27 @@ sum_del(_,0,Sum,X):-X is Sum, !.
 sum_del(N, Count, Sum, X):- Count1 is Count - 1,  ((check_del(Count,N)) -> Sum1 is Sum + Count;Sum1 is Sum), sum_del(N,Count1,Sum1,X).
 sum_del_chisla(N,X):-sum_del(N,N,0,X).
 
+
+%13 номер
+seq(1,0):-!.
+seq(N,R):-seq(N,0,R),!.
+
+seq(1,R,R):-!.
+seq(N,TekR,R):-
+NextR is TekR+1,
+M is N mod 2,
+( M=0,
+NextN is N div 2;
+NextN is 3*N+1),
+seq(NextN,NextR,R),!.
+
+solve(R):-solve(1,0,R).
+
+solve(99999,R,R):-!.
+solve(N,TekR,R):-
+NextN is N+1,
+seq(N,L),
+( L>TekR,
+NextR is L;
+NextR is TekR),
+solve(NextN,NextR,R),!.
