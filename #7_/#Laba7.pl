@@ -1,0 +1,25 @@
+% преобразование строки в  список ASCII кодов символов
+read_string(10,L,L,N,N):-!.	% 10 - enter
+read_string(X,L,CurL,N,CurN):-	NewN is CurN+1,append(CurL,[X],NewL),
+				get0(Y),read_string(Y,L,NewL,N,NewN).
+read_string(L,N):-	nl,write("input string: "),
+			get0(X),read_string(X,L,[],N,0).
+
+% вывод строки через список ASCII кодов символов
+write_string([]):-!.
+write_string([H|T]):-	put(H),
+			write_string(T).
+
+% вывод строки через список списков ASCII кодов символов
+write_strings([]):-!.
+write_strings([H|T]):-	write_string(H),nl,
+			write_strings(T).
+
+% задание 1
+task1:-	read_string(L,N),nl,
+
+		write_string(L),write(", "),
+		write_string(L),write(", "),
+		write_string(L),nl,nl,
+
+		write("Length: "),writeln(N),nl.
