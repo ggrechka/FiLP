@@ -19,29 +19,30 @@ append1([H1|T1],List,[H1|T3]):-append1(T1,List,T3).
 pr(X):-read_str(List,X) , write_str(List), Z = ",", write(Z),  write_str(List), write(Z),  write_str(List).
 
 %Р—Р°РґР°РЅРёРµ 2
-count_words([],K,K):-!.
-count_words(A,I,K):-skip_space(A,A1),get_word(A1,Word,A2),Word \=[],I1 is I+1,count_words(A2,I1,K),!.
-count_words(_,K,K).
+task2:-	read_str(L,_),
+		count_words(L,Count),
+		write("number of words: "),
+		writeln(Count),nl.
 
-skip_space([32|T],A1):-skip_space(T,A1),!.
-skip_space(A1,A1).
+% считает количество слов в строке
+count_words([],Count,Count):-!.
+count_words(L,Count,CurCount):-	skip_spaces(L,CurL),
+				get_word(CurL,NewL,Word),
+				Word \= [],
+				NewCount is CurCount+1,
+				count_words(NewL,Count,NewCount),!.
+count_words(_,Count,Count).
+count_words(L,Count):-count_words(L,Count,0).
 
+% убирает пробелы в начале строки
+skip_spaces([32|T],NewL):-skip_spaces(T,NewL),!.
+skip_spaces(L,L).
+
+% вычленяет слово в начале строки
 get_word([],[],[]):-!.
-get_word(A,Word,A2):-get_word(A,[],Word,A2).
+get_word(L,NewL,Word):-get_word(L,NewL,Word,[]).
 
-get_word([],Word,Word,[]).
-get_word([32|T],Word,Word,T):-!.
-get_word([H|T],W,Word,A2):-append(W,[H],W1), get_word(T,W1,Word,A2).
-
-
-get_words(A,Words,K):-get_words(A,[],Words,0,K).
-
-get_words([],B,B,K,K):-!.
-get_words(A,Temp_words,B,I,K):-
-	skip_space(A,A1),get_word(A1,Word,A2),Word \=[],
-	I1 is I+1,append(Temp_words,[Word],T_w),get_words(A2,T_w,B,I1,K),!.
-get_words(_,B,B,K,K).
-
-count_words(List,Count):-count_words(List,0,Count).
-
-task2:- write("Write str: "),read_str(List),write("Count words: "),count_words(List,Count),write(Count).
+get_word([],[],Word,Word).
+get_word([32|T],T,Word,Word):-!.
+get_word([H|T],NewL,Word,CurWord):-	append(CurWord,[H],NewWord),
+					get_word(T,NewL,Word,NewWord).
