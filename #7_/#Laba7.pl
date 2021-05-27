@@ -23,3 +23,32 @@ task1:-	read_string(L,N),nl,
 		write_string(L),nl,nl,
 
 		write("Length: "),writeln(N),nl.
+
+% задание 2
+task2:-	read_string(L,_),
+		count_words(L,Count),
+		write("Words: "),
+		writeln(Count),nl.
+
+% количество слов в строке
+count_words([],Count,Count):-!.
+count_words(L,Count,CurCount):-	skip_spaces(L,CurL),
+				get_word(CurL,NewL,Word),
+				Word \= [],
+				NewCount is CurCount+1,
+				count_words(NewL,Count,NewCount),!.
+count_words(_,Count,Count).
+count_words(L,Count):-count_words(L,Count,0).
+
+% убирает пробелы в начале строки
+skip_spaces([32|T],NewL):-skip_spaces(T,NewL),!.
+skip_spaces(L,L).
+
+% вычленяет слово в начале строки
+get_word([],[],[]):-!.
+get_word(L,NewL,Word):-get_word(L,NewL,Word,[]).
+
+get_word([],[],Word,Word).
+get_word([32|T],T,Word,Word):-!.
+get_word([H|T],NewL,Word,CurWord):-	append(CurWord,[H],NewWord),
+					get_word(T,NewL,Word,NewWord).
