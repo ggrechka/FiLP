@@ -282,3 +282,95 @@ task11:-	read_string(L,Length),
 
 		write("modified: "),
 		write_string(ResL),nl,nl.
+
+% задание 12
+task12:-	read_string(L,_),
+
+		split_string(L,CurL,3),		% 3 - длина фрагмента
+		ch_random_lists(CurL,NewL,2),	% 2 - индекс вставки
+		double_sort(NewL,ResL),	
+		
+		nl,writeln("fragments with three characters:"),
+		write_strings(CurL),nl,
+		
+		writeln("fragments with replaced middle character:"),
+		write_strings(NewL),nl,
+
+		writeln("sorted fragments:"),
+		write_strings(ResL),nl.
+
+list_length([],0):-!.
+list_length([_|T],X):-	list_length(T,CurX),
+			X is CurX+1.
+
+
+% удалить элемент с заданным номером
+list_delete_item([_|T],CurList,ResList,CurN,CurN):-	appendList(CurList,T,ResList),!.
+list_delete_item([H|T],CurList,ResList,CurN,N):-	appendList(CurList,[H],NewList),
+							NewN is CurN+1,
+							list_delete_item(T,NewList,ResList,NewN,N).
+list_delete_item(List,ResList,N):-list_delete_item(List,[],ResList,1,N).
+% сортировка списка
+sort_list([],L,L):-!.
+sort_list(L,ResL,CurResL):-	max_list_down(L,Max),
+				append([Max],CurResL,NewResL),
+				list_el_numb(L,Max,I),
+				list_delete_item(L,CurL,I),
+				sort_list(CurL,ResL,NewResL).
+sort_list(L,ResL):-sort_list(L,ResL,[]).
+
+% сортировка списков в списке
+double_sort([],L,L):-!.
+double_sort([H|T],ResL,CurResL):-	sort_list(H,CurH),
+					append(CurResL,[CurH],NewResL),
+					double_sort(T,ResL,NewResL).
+double_sort(L,ResL):-double_sort(L,ResL,[]).
+
+% разделение строки на фрагменты с заданным количеством элементов
+% *длина строки должна делиться на заданное число*
+split_string([],[],_):-!.
+split_string(L,ResL,Count):-	list_length(L,Length),
+				Length>=Count,
+				CurCount is Count+1,
+				build_list(L,FragL,CurCount),
+				build_list_after(L,CurL,Count),
+				split_string(CurL,CurResL,Count),
+				append([FragL],CurResL,ResL).
+
+% генерация кода символа, не совпадающего ни с одним элементом списка,
+% *диапазон - маленькие буквы латинского алфавита [97,122]*
+character_random(_,_,123):-	!,fail.
+character_random(L,R,CurR):-	not(member(L,CurR)),
+				R=CurR,!.
+character_random(L,R,CurR):-	NewR is CurR+1,
+				character_random(L,R,NewR).				
+character_random(L,R):-character_random(L,R,97).
+
+% замена в списках списка символа на заданной позиции
+% другим рандомным символом, не совпадающим ни с одним
+% из элементов списка
+ch_random_lists([],L,L,_):-!.
+ch_random_lists([H|T],ResL,CurResL,I):-	character_random(H,R),
+					replace_character(H,CurH,R,I),
+					append(CurResL,[CurH],NewResL),
+					ch_random_lists(T,ResL,NewResL,I).
+ch_random_lists(L,ResL,I):-ch_random_lists(L,ResL,[],I). 
+
+% замена символа на заданной позиции
+replace_character(L,ResL,X,I):-	list_delete_item(L,CurL,I),
+				insert_list(CurL,ResL,X,I).
+
+% замена местами двух символов по индексам
+replace_characters(L,ResL,I1,I2):-	list_el_numb(L,X1,I1),
+					list_el_numb(L,X2,I2),
+					
+					replace_character(L,CurL,X1,I2),
+					replace_character(CurL,ResL,X2,I1).
+% вставить элемент на заданный индекс
+insert_list(L,ResL,X,Ind):-	build_list(L,L1,Ind),
+
+				CurInd is Ind-1,
+				build_list_after(L,L2,CurInd),
+
+				append(L1,[X],CurL1),
+				append(CurL1,L2,ResL).
