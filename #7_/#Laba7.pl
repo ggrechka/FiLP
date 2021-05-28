@@ -233,3 +233,24 @@ task8:-	read_string(L,_),
 		write("success: "),put(S),nl;
 		
 		writeln("not found!"),nl).
+
+
+% задание 9
+task9:-	read_string(L1,Length1),
+		write("length: "),writeln(Length1),
+
+		read_string(L2,Length2),
+		write("length: "),writeln(Length2),
+
+		(Length1>Length2 ->
+		Reps is Length1-Length2,L=L1;
+		Reps is Length2-Length1,L=L2),
+
+		nl,write("quantity of reps: "),writeln(Reps),
+		nl,write_reps(L,Reps),nl.
+
+% выводит строку заданное количество раз
+write_reps(_,0):-!.
+write_reps(L,X):-	CurX is X-1,
+			write_string(L),nl,
+			write_reps(L,CurX).
