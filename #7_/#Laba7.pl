@@ -118,3 +118,45 @@ count_reps([],[],_):-!.
 count_reps([Word|T],Counts,Words):-	count_reps(T,CurCounts,Words),
 					number_times(Words,Count,Word),
 					append([Count],CurCounts,Counts).
+
+
+% задание 4
+task4:-	read_string(L,Length),
+		write("string length: "),write(Length),nl,
+
+		(Length>5 -> Index is Length-3,
+
+		build_list(L,CurL1,4),
+		build_list_after(L,CurL2,Index),
+
+		nl,write("first three characters: "),write_string(CurL1),
+		nl,write("last three characters: "),write_string(CurL2),nl,nl;
+
+		L \= [],
+		list_el_numb(L,First,1),
+		build_reps(Length,First,RepsL),
+
+		nl,writeln("repeated first character,"),
+		write("number of reps is equal to the length: "),
+		write_string(RepsL),nl,nl).
+
+% создает список, состоящий из одного элемента заданное количество раз
+build_reps(0,_,L,L):-!.
+build_reps(N,X,L,CurL):-	CurN is N-1,
+				append(CurL,[X],NewL),
+				build_reps(CurN,X,L,NewL).
+build_reps(N,X,L):-build_reps(N,X,L,[]).
+
+build_list(_,CurList,CurList,1):-!.
+build_list([H|T],CurList,ResList,Num):-	appendList(CurList,[H],NewList),
+					CurNum is Num-1,
+					build_list(T,NewList,ResList,CurNum).
+build_list(List,ResList,Num):-build_list(List,[],ResList,Num).
+
+
+% собирает в новый список элементы после заданного номера (через рекурсию вниз)
+build_list_after([],CurL,CurL,_):-!.
+build_list_after([H|T],CurL,ResL,N):-	NewN is N-1,
+					(NewN<0 -> appendList(CurL,[H],NewL);NewL=CurL),
+					build_list_after(T,NewL,ResL,NewN).
+build_list_after(L,ResL,N):-build_list_after(L,[],ResL,N).
