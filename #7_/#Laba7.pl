@@ -500,3 +500,29 @@ word_next(_,[],_):-!.
 word_next(L,[H|T],I):-	CurI is I+1,
 			list_el_numb(L,H,CurI),
 			word_next(L,T,CurI).
+
+% задание 18
+task18:-	read_string(L,_),
+		
+		W=[97,98,99],
+		remove_word_by_dig(L,ResL,W),
+
+		write("modified: "),
+		write_string(ResL),nl,nl.
+		
+% прооверяет находится ли после слов цифра
+% *есть индексы вхождения слова*
+find_word_dig(_,[],[],_):-!.
+find_word_dig(L,[I|T],CurInL,LenW):-	CurI is I+LenW,
+					list_el_numb(L,Elem,CurI),
+					Elem>=48,Elem=<57,
+					find_word_dig(L,T,NewInL,LenW),
+					append([I],NewInL,CurInL),!.
+find_word_dig(L,[_|T],CurInL,LenW):-	find_word_dig(L,T,CurInL,LenW).
+
+% удаляет каждое слово X, после которого следует цифра
+remove_word_by_dig(L,ResL,Word):-	find_index_in(L,InL,Word),
+					list_length(Word,LenW),
+					find_word_dig(L,InL,CurInL,LenW),
+					reverse(CurInL,NewInL),
+					replace_words(L,ResL,NewInL,[],LenW).
