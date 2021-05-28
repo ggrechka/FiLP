@@ -272,3 +272,13 @@ task10:-	read_string(L,_),
 check_string(_,[],[]).
 check_string(L,[Elem|T1],[Ind|T2]):-	list_el_numb(L,Elem,Ind),
 					check_string(L,T1,T2).
+
+% задание 11
+task11:-	read_string(L,Length),
+
+		(Length>10 -> build_list(L,ResL,7);
+		Count is 12-Length,build_reps(Count,111,Reps),
+		append(L,Reps,ResL)),
+
+		write("modified: "),
+		write_string(ResL),nl,nl.
