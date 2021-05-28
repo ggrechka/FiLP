@@ -541,7 +541,7 @@ task19:-	read_string(L,_),
 task20:-	read_string(L,_),
 		remove_spaces(L,ResL),
 
-		write("output modified string: "),
+		write("modified: "),
 		write_string(ResL),nl,nl.
 
 % удаляет все лишние пробелы
