@@ -197,3 +197,26 @@ string_seq([H|T],ResL,X,I):-	string_seq(T,CurResL,X,CurI),
 				append(CurResL,[H],ResL);ResL=CurResL).
 string_seq(List,ResL,X):-	reverse(List,InvList),
 				string_seq(InvList,ResL,X,_).
+
+
+% задание 7
+task7:-	read_string(L,_),
+
+		number_times(L,CountP,43),	% 43 - '+'
+		number_times(L,CountM,45),	% 45 - '-'
+		CountPM is CountP+CountM,
+
+		string_next(L,48,CountN),	% 48 - '0'
+
+		nl,write("total quantity of '+' and '-': "),
+		writeln(CountPM),
+
+		write("number of characters followed by '0': "),
+		writeln(CountN),nl.
+
+% считает количество элементов, после которых следует заданный
+string_next([],_,0):-!.
+string_next([_|[]],_,0):-!.
+string_next([_,H2|T],H2,Count):-	string_next([H2|T],H2,CurCount),
+					Count is CurCount+1,!.
+string_next([_|T],X,Count):-	string_next(T,X,Count).
