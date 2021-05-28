@@ -396,3 +396,24 @@ replace_even([_|T],CurL,ResL,I):-	CurI is I+1,
 					append(CurL,[99],NewL),
 					replace_even(T,NewL,ResL,CurI).
 replace_even(L,ResL):-replace_even(L,[],ResL,0).
+
+
+% задание 14
+task14:-	read_string(L,_),
+		count_digits(L,Count),
+
+		write("count of digits: "),
+		write(Count),nl,nl.
+
+% считает количество цифр в строке
+count_digits([],0):-!.
+count_digits([H|T],Count):-	count_digits(T,CurCount),
+				(H>=48,H=<57 ->
+				Count is CurCount+1;
+				Count=CurCount).
+
+%task 15
+task15:-read_string(List,_),abc(List).
+
+abc([]):-!.
+abc([H|T]):-(H\=97,H\=98,H\=99->!,fail;abc(T)).
