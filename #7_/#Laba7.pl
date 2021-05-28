@@ -574,3 +574,15 @@ words_by_seps(L,[Sep|T],Words,CurWords):-	list_el_numb(L,Sep,SepI),
 						words_by_seps(CurL,T,Words,NewWords),!.
 words_by_seps(L,_,Words,CurWords):-	append(CurWords,[L],Words).
 words_by_seps(L,Seps,Words):-words_by_seps(L,Seps,Words,[]). 
+
+
+% задание 22
+task22:-read_string(List,_),length_list(List,L),print_sr(List),print_sr(List,L),!.
+print_sr([H|T]):-write("First = "),put(H),nl,reverse([H|T],[HR|_]),write("End = "),put(HR),nl,!.
+print_sr(List,Length):-not(0 is Length mod 2),L is Length div 2+1,index(List,El,L,0),write("Middle = "),put(El),!.
+
+length_list([],0):-!.
+length_list([_|T],X):-length_list(T,X1),X is (X1 + 1).
+
+index([H|T],El,Num):-index([H|T],El,Num,0).
+index([H|T],El,Num,K):-K1 is K+1,(H = El,Num = K1 -> !;index(T,El,Num,K1)).
