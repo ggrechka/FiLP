@@ -555,3 +555,22 @@ build_string([],[]):-!.
 build_string([H|T],ResL):-	build_string(T,CurResL),
 				append([32],H,CurH),
 				append(CurH,CurResL,ResL).
+
+% задание 21
+task21:-	read_string(L,_),
+		read_string(Seps,_),
+		
+		words_by_seps(L,Seps,Words),
+
+		nl,writeln("words of string:"),
+		write_strings(Words),nl.
+
+% разбивает строку на слова через заданные разделители
+words_by_seps([],_,Words,Words):-!.
+words_by_seps(L,[Sep|T],Words,CurWords):-	list_el_numb(L,Sep,SepI),
+						build_list(L,Word,SepI),
+						append(CurWords,[Word],NewWords),
+						build_list_after(L,CurL,SepI),
+						words_by_seps(CurL,T,Words,NewWords),!.
+words_by_seps(L,_,Words,CurWords):-	append(CurWords,[L],Words).
+words_by_seps(L,Seps,Words):-words_by_seps(L,Seps,Words,[]). 
