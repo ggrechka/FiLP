@@ -473,3 +473,30 @@ insert_word(L,L,[],_):-!.
 insert_word(L,ResL,[H|T],I):-	insert_list(L,CurL,H,I),
 				CurI is I+1,
 				insert_word(CurL,ResL,T,CurI).
+
+% задание 17 
+task17:-	read_string(L,_),
+
+		W1=[120,97,98,99],	% xabc
+		W2=[97,98,99],		% abc
+
+		replace_words(L,ResL,W1,W2),
+		
+		write("modified: "),
+		write_string(ResL),nl,nl.
+				
+% вспомогательный: слово для проверки нужно перевернуть
+check_word_bef(L,W,I):-	reverse(W,CurW),
+			word_bef(L,CurW,I).
+
+% проверка, находится ли слово до заданного индекса
+word_bef(_,[],_):-!.
+word_bef(L,[H|T],I):-	CurI is I-1,
+			list_el_numb(L,H,CurI),
+			word_bef(L,T,CurI).
+
+% проверка, находится ли слово после заданного индекса
+word_next(_,[],_):-!.
+word_next(L,[H|T],I):-	CurI is I+1,
+			list_el_numb(L,H,CurI),
+			word_next(L,T,CurI).
