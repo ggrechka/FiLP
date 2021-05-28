@@ -52,3 +52,69 @@ get_word([],[],Word,Word).
 get_word([32|T],T,Word,Word):-!.
 get_word([H|T],NewL,Word,CurWord):-	append(CurWord,[H],NewWord),
 					get_word(T,NewL,Word,NewWord).
+
+
+
+% задание 3
+task3:-	read_string(L,_),
+
+		get_words(L,Words,_),
+		unique_list(Words,UniqueW),
+
+		count_reps(UniqueW,Counts,Words),
+		max_list_down(Counts,MaxC),
+
+		list_el_numb(Counts,MaxC,Index),
+		list_el_numb(UniqueW,MaxW,Index),
+
+		nl,write("most common word: "),write_string(MaxW),nl,
+		write("frequency: "),writeln(MaxC),nl.
+
+% собирает список из слов
+get_words([],Words,Words,C,C):-!.
+get_words(L,Words,CurWords,C,CurC):-	skip_spaces(L,CurL),
+					get_word(CurL,NewL,Word),
+					Word \=[],
+					NewC is CurC+1,
+					append(CurWords,[Word],NewWords),
+					get_words(NewL,Words,NewWords,C,NewC),!.
+get_words(_,Words,Words,C,C).
+get_words(L,Words,Count):-get_words(L,Words,[],Count,0).
+
+
+list_el_numb([],_,_,_):-fail,!.
+list_el_numb([H|_],H,CurNum,CurNum):-!.
+list_el_numb([_|T],Elem,CurNum,Num):-	NewNum is CurNum+1,
+					list_el_numb(T,Elem,NewNum,Num).
+list_el_numb(List,Elem,Num):-list_el_numb(List,Elem,1,Num).
+
+
+number_times([],0,_):-!.
+number_times([H|T],X,H):-	number_times(T,CurX,H),
+				X is CurX+1,!.
+number_times([_|T],X,N):-	number_times(T,X,N).
+
+max_list_down([],CurMax,CurMax):-!.
+max_list_down([H|T],CurMax,Max):-	(H>CurMax -> NewMax=H;NewMax=CurMax),
+					max_list_down(T,NewMax,Max).
+max_list_down([H|T],Max):-max_list_down(T,H,Max).
+
+appendList([],X,X).
+appendList([H|T1],X,[H|T2]):-appendList(T1,X,T2).
+
+list_delete_equal([],CurList,CurList,_):-!.
+list_delete_equal([H|T],CurList,ResList,H):-	list_delete_equal(T,CurList,ResList,H),!.
+list_delete_equal([H|T],CurList,ResList,X):-	appendList(CurList,[H],NewList),
+						list_delete_equal(T,NewList,ResList,X).	
+list_delete_equal(List,ResList,X):-list_delete_equal(List,[],ResList,X).
+
+unique_list([],[]):-!.
+unique_list([H|T],ResList):-	list_delete_equal(T,NewList,H),
+				unique_list(NewList,CurList),
+				appendList([H],CurList,ResList).
+
+% считает количество вхождений элементов из одного списка в другой список
+count_reps([],[],_):-!.
+count_reps([Word|T],Counts,Words):-	count_reps(T,CurCounts,Words),
+					number_times(Words,Count,Word),
+					append([Count],CurCounts,Counts).
