@@ -254,3 +254,21 @@ write_reps(_,0):-!.
 write_reps(L,X):-	CurX is X-1,
 			write_string(L),nl,
 			write_reps(L,CurX).
+
+% задание 10
+task10:-	read_string(L,_),
+
+		(check_string(L,[97,98,99],[1,2,3]) ->
+		
+		build_list_after(L,CurL,3),
+		append([119,119,119],CurL,ResL);
+
+		append(L,[122,122,122],ResL)),
+
+		write("modified: "),
+		write_string(ResL),nl,nl.
+
+% проверяет, находятся ли заданные элементы по заданным индексам
+check_string(_,[],[]).
+check_string(L,[Elem|T1],[Ind|T2]):-	list_el_numb(L,Elem,Ind),
+					check_string(L,T1,T2).
