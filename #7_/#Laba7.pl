@@ -536,3 +536,22 @@ task19:-	read_string(L,_),
 
 		write("count: "),
 		writeln(Count),nl.
+
+% задание 20
+task20:-	read_string(L,_),
+		remove_spaces(L,ResL),
+
+		write("output modified string: "),
+		write_string(ResL),nl,nl.
+
+% удаляет все лишние пробелы
+remove_spaces(L,ResL):-	get_words(L,Words,_),
+			build_string(Words,CurResL),
+			skip_spaces(CurResL,ResL).
+
+% вставляет между словами один пробел
+% *остаётся лишний пробел в начале*
+build_string([],[]):-!.
+build_string([H|T],ResL):-	build_string(T,CurResL),
+				append([32],H,CurH),
+				append(CurH,CurResL,ResL).
