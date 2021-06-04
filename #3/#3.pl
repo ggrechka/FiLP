@@ -116,25 +116,22 @@ sum_del_chisla(N,X):-sum_del(N,N,0,X).
 
 
 %13 номер
-seq(1,0):-!.
-seq(N,R):-seq(N,0,R),!.
+posled(1, Length, Length) :- !.
+posled(Num, CurLength, Length) :-
+  CurLength1 is CurLength + 1,
+  (0 is Num mod 2 ->
+  Num1 is Num div 2;
+  Num1 is Num * 3 + 1),
+  posled(Num1, CurLength1, Length).
+posled(Num, Length) :- posled(Num, 0, Length).
 
-seq(1,R,R):-!.
-seq(N,TekR,R):-
-NextR is TekR+1,
-M is N mod 2,
-( M=0,
-NextN is N div 2;
-NextN is 3*N+1),
-seq(NextN,NextR,R),!.
+% Index - текущее число, CurMax - текущая длина цепочки, Max - максимальная
+posledMore(10000, Max, Max) :- !.
+posledMore(Index, CurMax, Max) :-Index1 is Index + 1,posled(Index, Length),(Length > CurMax ->
+  CurMax1 is Length;CurMax1 is CurMax),posledMore(Index1, CurMax1, Max).
+posledMore(Max) :- posledMore(1, 0, Max).
 
-solve(R):-solve(1,0,R).
-
-solve(99999,R,R):-!.
-solve(N,TekR,R):-
-NextN is N+1,
-seq(N,L),
-( L>TekR,
-NextR is L;
-NextR is TekR),
-solve(NextN,NextR,R),!.
+t13 :-
+  posledMore(Max),
+  write("Max length of line => "),
+  write(Max).
